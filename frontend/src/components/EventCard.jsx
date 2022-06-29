@@ -35,8 +35,7 @@ export default function EventCard({ event }) {
       >
         <Center bg="white">
           <Image
-            height={{ base: "190px", md: "30vh" }}
-            width = {{ base: "75%", md: "20vw" }}
+            boxSize="15rem"
             src={baseURL + "media/" + event.fields.eventCoverImg}
             alt="event poster"
           />
