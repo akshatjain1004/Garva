@@ -27,7 +27,7 @@ export default function EventCard({ event }) {
         borderWidth="1px"
         borderRadius="lg"
         w={{ sm: "100%", md: "30vw" }}
-        height={{ sm: "476px", md: "80vh" }}
+        height={{ sm: "476px", md: "30rem" }}
         direction={{ base: "column", md: "column" }}
         bg={useColorModeValue("white", "gray.900")}
         boxShadow={"2xl"}
