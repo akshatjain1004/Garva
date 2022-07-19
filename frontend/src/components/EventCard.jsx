@@ -48,7 +48,6 @@ export default function EventCard({ event }) {
           p={1}
           pt={2}
         >
-
           <Heading fontSize={window.innerWidth > 1250 ? "2xl" : "xl"} fontFamily={"body"}>
             {event.fields.eventName}
           </Heading>

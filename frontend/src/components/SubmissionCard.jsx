@@ -30,7 +30,9 @@ class SubmissionCard extends Component {
       error: null,
       submissionCode: "",
       event: "",
-      submissionFile: null,
+      articleSubmissionFile: null,
+      paintingImageSubmissionFile: null,
+      paintingSourceSubmissionFile: null,
       isModalOpen: false,
       success: false,
     };
@@ -52,8 +54,16 @@ class SubmissionCard extends Component {
     this.setState({ event: e.target.value });
   };
 
-  handleFileChange = (e) => {
-    this.setState({ submissionFile: e.target.files[0] });
+  handleArticleFileChange = (e) => {
+    this.setState({ articleSubmissionFile: e.target.files[0] });
+  };
+
+  handlePaintingImageFileChange = (e) => {
+    this.setState({ paintingImageSubmissionFile: e.target.files[0] });
+  };
+
+  handlePaintingSourceFileChange = (e) => {
+    this.setState({ paintingSourceSubmissionFile: e.target.files[0] });
   };
 
   handleSubmit = (e) => {
@@ -62,7 +72,13 @@ class SubmissionCard extends Component {
     const formData = new FormData();
     formData.append("submissionCode", this.state.submissionCode);
     formData.append("event", this.state.event);
-    formData.append("submissionFile", this.state.submissionFile);
+
+    if (this.state.event === "article") {
+      formData.append("articleSubmissionFile", this.state.articleSubmissionFile);
+    } else if (this.state.event === "painting") {
+      formData.append("paintingImageSubmissionFile", this.state.paintingImageSubmissionFile);
+      formData.append("paintingSourceSubmissionFile", this.state.paintingSourceSubmissionFile);
+    }
 
     submit(formData).then((res) => {
       if (Object.keys(res).length === 0) {
@@ -107,7 +123,7 @@ class SubmissionCard extends Component {
         <ModalBody>
           <Text>
             Your submission for the event "
-            {this.state.event === "poetry" ? "Poetry" : "Article Writing"}" has
+            {this.state.event === "article" ? "Article Writing" : "Digital Painting"}" has
             been successfully received!
           </Text>
         </ModalBody>
@@ -120,6 +136,44 @@ class SubmissionCard extends Component {
       );
     }
   };
+
+  renderFileUploader = () => {
+    if (this.state.event === "article") {
+      return (
+        <FormControl id="articleSubmissionFile" isRequired>
+          <FormLabel>Article Submission File PDF</FormLabel>
+          <Input
+            type="file"
+            name="submissionFile"
+            accept="application/pdf"
+            onChange={this.handleArticleFileChange}
+          />
+        </FormControl>
+      )
+    } else if (this.state.event === "painting") {
+      return (
+        <div>
+          <FormControl id="paintingImageSubmissionFile" isRequired>
+            <FormLabel>Submit your image (.jpg, .jpeg, .png)</FormLabel>
+            <Input
+              type="file"
+              name="submissionFile"
+              accept="image/*"
+              onChange={this.handlePaintingImageFileChange}
+            />
+          </FormControl>
+          <FormControl id="paintingSourceSubmissionFile" isRequired>
+            <FormLabel>Submit your source file (.ai, .psd, .sketch)</FormLabel>
+            <Input
+              type="file"
+              name="submissionFile"
+              onChange={this.handlePaintingSourceFileChange}
+            />
+          </FormControl>
+        </div>
+      )
+    }
+  }
 
   render() {
     return (
@@ -147,19 +201,11 @@ class SubmissionCard extends Component {
                     placeholder="Select event"
                     onChange={this.handleEventChange}
                   >
-                    <option value="poetry">Poetry</option>
                     <option value="article">Article Writing</option>
+                    <option value="painting">Digital Painting</option>
                   </Select>
                 </FormControl>
-                <FormControl id="submissionFile" isRequired>
-                  <FormLabel>Submission File</FormLabel>
-                  <Input
-                    type="file"
-                    name="submissionFile"
-                    accept="application/pdf"
-                    onChange={this.handleFileChange}
-                  />
-                </FormControl>
+                {this.renderFileUploader()}
                 <Stack spacing={10} pt={2}>
                   <Button
                     loadingText="Submitting"

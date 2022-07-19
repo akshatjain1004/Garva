@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 
 import phemeLogo from "../assets/logos/pheme.jpg";
+import designerdsLogo from "../assets/logos/designerds.jpg";
 import quizSocietyLogo from "../assets/logos/quizsoc.jpg";
 import litSocietyLogo from "../assets/logos/litsoc.jpg";
 
@@ -28,10 +29,13 @@ export default function Footer() {
                             Pranav Goswami: +91 93282 76067
                         </Text>
                         <Text>
-                            Jahnab Dutta: +91 87239 66409
+                            Hardik Ravat: +91 99836 05678
                         </Text>
                         <Text>
                             Akshat Jain: +91 98732 35040
+                        </Text>
+                        <Text>
+                            Jahnab Dutta: +91 87239 66409
                         </Text>
                     </Stack>
                     <Stack spacing={8} align="center" justifyContent="center">
@@ -44,13 +48,19 @@ export default function Footer() {
                                 alt="PHEME Logo"
                             />
                             <Image
-                                src={quizSocietyLogo}
+                                src={designerdsLogo}
+                                h={{ base: "10vh", md: "10vh" }}
+                                w={{ base: "20vw", md: "5vw" }}
+                                alt="PHEME Logo"
+                            />
+                            <Image
+                                src={litSocietyLogo}
                                 h={{ base: "10vh", md: "10vh" }}
                                 w={{ base: "20vw", md: "5vw" }}
                                 alt="Quiz Society Logo"
                             />
                             <Image
-                                src={litSocietyLogo}
+                                src={quizSocietyLogo}
                                 h={{ base: "10vh", md: "10vh" }}
                                 w={{ base: "20vw", md: "5vw" }}
                                 alt="Quiz Society Logo"
@@ -62,8 +72,9 @@ export default function Footer() {
                             Follow Us
                         </Text>
                         <Link href="https://instagram.com/pheme_iitj?igshid=YmMyMTA2M2Y=" target="_blank">PHEME</Link>
-                        <Link href="https://instagram.com/quizclubiitj?igshid=YmMyMTA2M2Y=" target="_blank">Quiz Club</Link>
+                        <Link href="https://www.instagram.com/designerds.iitj/" target="_blank">Designerds</Link>
                         <Link href="https://instagram.com/litsociitj?igshid=YmMyMTA2M2Y=" target="_blank">Literature Society</Link>
+                        <Link href="https://instagram.com/quizclubiitj?igshid=YmMyMTA2M2Y=" target="_blank">Quiz Club</Link>
                     </Stack>
                 </SimpleGrid>
             </Container>

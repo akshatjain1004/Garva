@@ -33,9 +33,8 @@ class RegisterEventCard extends Component {
       email: "",
       contact: "",
       college: "",
-      poetry: false,
       article: false,
-      quiz: false,
+      painting: false,
       submissionCode: "",
       isModalOpen: false,
     };
@@ -73,21 +72,15 @@ class RegisterEventCard extends Component {
     });
   };
 
-  handlePoetryChange = (e) => {
-    this.setState({
-      poetry: e.target.checked,
-    });
-  };
-
   handleArticleChange = (e) => {
     this.setState({
       article: e.target.checked,
     });
   };
 
-  handleQuizChange = (e) => {
+  handlePaintingChange = (e) => {
     this.setState({
-      quiz: e.target.checked,
+      painting: e.target.checked,
     });
   };
 
@@ -99,9 +92,8 @@ class RegisterEventCard extends Component {
       userEmail: this.state.email,
       userContact: this.state.contact,
       userCollegeName: this.state.college,
-      poetry: this.state.poetry ? "true" : "",
       article: this.state.article ? "true" : "",
-      quiz: this.state.quiz ? "true" : "",
+      painting: this.state.painting ? "true" : ""
     };
 
     registerEvent(userDetails).then((res) => {
@@ -149,7 +141,7 @@ class RegisterEventCard extends Component {
           <br />
           <Text>
             Your submission code is: {this.state.submissionCode}. Please save
-            this code as it is required while making submissions (except quiz).
+            this code as it is required while making submissions.
             It has also been emailed to your email address.
           </Text>
         </ModalBody>
@@ -211,25 +203,18 @@ class RegisterEventCard extends Component {
                   <CheckboxGroup>
                     <Stack spacing={[1, 5]} direction={["column", "row"]}>
                       <Checkbox
-                        value="poetry"
-                        name="poetry"
-                        onChange={this.handlePoetryChange}
-                      >
-                        <Text>Poetry</Text>
-                      </Checkbox>
-                      <Checkbox
                         value="article"
                         name="article"
                         onChange={this.handleArticleChange}
                       >
-                        <Text>Article</Text>
+                        <Text>Article Writing</Text>
                       </Checkbox>
                       <Checkbox
-                        value="quiz"
-                        name="quiz"
-                        onChange={this.handleQuizChange}
+                        value="painting"
+                        name="painting"
+                        onChange={this.handlePaintingChange}
                       >
-                        <Text>Quiz</Text>
+                        <Text>Digital Painting</Text>
                       </Checkbox>
                     </Stack>
                   </CheckboxGroup>
