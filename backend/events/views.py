@@ -45,22 +45,19 @@ def register(request):
     except CustomUser.DoesNotExist:
         pass
 
-    poetry = False
     article = False
-    quiz = False
+    painting = False
 
-    if(body_data['poetry'] == "true"):
-        poetry = True
     if(body_data['article'] == "true"):
         article = True
-    if(body_data['quiz'] == "true"):
-        quiz = True
+    if(body_data['painting'] == "true"):
+        painting = True
 
-    if poetry or article:
+    if article or painting:
         code = random_string(3, 4)
 
         try:
-            sendCodeInEmail(body_data['userEmail'], code, poetry, article)
+            sendCodeInEmail(body_data['userEmail'], code, article, painting)
         except Exception:
             pass
 
@@ -72,9 +69,8 @@ def register(request):
         userEmail=body_data['userEmail'],
         userContact=body_data['userContact'],
         userCollegeName=body_data['userCollegeName'],
-        poetry=poetry,
-        quiz=quiz,
         article=article,
+        painting=painting,
         code=code,
     )
 
@@ -92,33 +88,43 @@ class SubmissionView(views.APIView):
     parser_classes = [MultiPartParser, FileUploadParser]
 
     def post(self, request):
-        file = request.data['submissionFile']
         code = request.data['submissionCode']
         event = request.data['event']
+
+        if event == "article":
+            articleFile = request.data['articleSubmissionFile']
+            print(articleFile)
+        else:
+            paintingImageFile = request.data['paintingImageSubmissionFile']
+            print(paintingImageFile)
+            paintingSourceFile = request.data['paintingSourceSubmissionFile']
+            print(paintingSourceFile)
+
         user = CustomUser.objects.get(code=code)
 
-        if event == "poetry":
-            if user.poetry:
-                if user.poetrySubmitted:
-                    return Response(json.dumps({"code": "DUP", "message": "You have already made a submission for this event."}), status=status.HTTP_400_BAD_REQUEST, headers={
-                        'Access-Control-Allow-Origin': '*'}, content_type='application/json')
-                else:
-                    user.poetrySubmitted = True
-                    user.poetrySubmission = file
-                    user.save()
-                    return Response(status=status.HTTP_200_OK, headers={
-                        'Access-Control-Allow-Origin': '*'})
-            else:
-                return Response(json.dumps({"code": "NR", "message": "You have not registered for this event."}), status=status.HTTP_400_BAD_REQUEST, headers={
-                    'Access-Control-Allow-Origin': '*'}, content_type='application/json')
-        elif event == "article":
+        if event == "article":
             if user.article:
                 if user.articleSubmitted:
                     return Response(json.dumps({"code": "DUP", "message": "You have already made a submission for this event."}), status=status.HTTP_400_BAD_REQUEST, headers={
                         'Access-Control-Allow-Origin': '*'}, content_type='application/json')
                 else:
                     user.articleSubmitted = True
-                    user.articleSubmission = file
+                    user.articleSubmission = articleFile
+                    user.save()
+                    return Response(status=status.HTTP_200_OK, headers={
+                        'Access-Control-Allow-Origin': '*'})
+            else:
+                return Response(json.dumps({"code": "NR", "message": "You have not registered for this event."}), status=status.HTTP_400_BAD_REQUEST, headers={
+                    'Access-Control-Allow-Origin': '*'}, content_type='application/json')
+        elif event == "painting":
+            if user.painting:
+                if user.paintingSubmitted:
+                    return Response(json.dumps({"code": "DUP", "message": "You have already made a submission for this event."}), status=status.HTTP_400_BAD_REQUEST, headers={
+                        'Access-Control-Allow-Origin': '*'}, content_type='application/json')
+                else:
+                    user.paintingSubmitted = True
+                    user.paintingImageSubmission = paintingImageFile
+                    user.paintingSourceSubmission = paintingSourceFile
                     user.save()
                     return Response(status=status.HTTP_200_OK, headers={
                         'Access-Control-Allow-Origin': '*'})

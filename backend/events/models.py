@@ -32,14 +32,16 @@ class CustomUser(models.Model):
     userCollegeName = models.CharField(max_length=1000)
     poetry = models.BooleanField(default=False)
     article = models.BooleanField(default=False)
-    quiz = models.BooleanField(default=False)
+    painting = models.BooleanField(default=False)
     code = models.CharField(max_length=10, unique=True)
-    poetrySubmission = models.FileField(
-        upload_to='submissions/poetry', null=True, blank=True)
     articleSubmission = models.FileField(
         upload_to='submissions/article', null=True, blank=True)
-    poetrySubmitted = models.BooleanField(default=False)
+    paintingImageSubmission = models.FileField(
+        upload_to='submissions/painting/images', null=True, blank=True)
+    paintingSourceSubmission = models.FileField(
+        upload_to='submissions/painting/source', null=True, blank=True)
     articleSubmitted = models.BooleanField(default=False)
+    paintingSubmitted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.userName

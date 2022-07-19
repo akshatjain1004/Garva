@@ -18,16 +18,16 @@ def random_string(letter_count, digit_count):
     return final_string
 
 
-def sendCodeInEmail(email, code, poetry, article):
+def sendCodeInEmail(email, code, article, painting):
     fromUser = "Board of Literary Affairs IIT Jodhpur"
     subject = "Submission Code for Garva"
 
-    if poetry and not article:
-        message = f"Your submission code for the event 'Poetry' is {code}. You can make your submission only once. Please do not share this code with anyone."
-    elif article and not poetry:
+    if article and not painting:
         message = f"Your submission code for the event 'Article Writing' is {code}. You can make your submission only once. Please do not share this code with anyone."
-    elif poetry and article:
-        message = f"Your submission code for the events 'Poetry' and 'Article Writing' is {code}. You can make your submission only once per event. Please do not share this code with anyone."
+    elif painting and not article:
+        message = f"Your submission code for the event 'Digital Painting' is {code}. You can make your submission only once. Please do not share this code with anyone."
+    elif article and painting:
+        message = f"Your submission code for the events 'Article Writing' and 'Digital Painting' is {code}. You can make your submission only once per event. Please do not share this code with anyone."
 
     to_email = email
 
