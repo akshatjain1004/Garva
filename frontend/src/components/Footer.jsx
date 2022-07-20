@@ -29,7 +29,7 @@ export default function Footer() {
                             Pranav Goswami: +91 93282 76067
                         </Text>
                         <Text>
-                            Hardik Ravat: +91 99836 05678
+                            Haardik Ravat: +91 99836 05678
                         </Text>
                         <Text>
                             Akshat Jain: +91 98732 35040
