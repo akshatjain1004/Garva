@@ -40,7 +40,7 @@ export default function Footer() {
                     </Stack>
                     <Stack spacing={8} align="center" justifyContent="center">
                     
-                        <Stack direction={"row"} spacing={10}>
+                        <Stack direction={"row"} spacing={{base: 5, md: 10}}>
                             <Image
                                 src={phemeLogo}
                                 h={{ base: "10vh", md: "10vh" }}
@@ -51,13 +51,13 @@ export default function Footer() {
                                 src={designerdsLogo}
                                 h={{ base: "10vh", md: "10vh" }}
                                 w={{ base: "20vw", md: "5vw" }}
-                                alt="PHEME Logo"
+                                alt="Designerds Logo"
                             />
                             <Image
                                 src={litSocietyLogo}
                                 h={{ base: "10vh", md: "10vh" }}
                                 w={{ base: "20vw", md: "5vw" }}
-                                alt="Quiz Society Logo"
+                                alt="Literature Society Logo"
                             />
                             <Image
                                 src={quizSocietyLogo}
